@@ -4,12 +4,21 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double _inputUser = 0;
+  double _kelvin = 0;
+  double _reamur = 0;
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Konverter Suhu',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -21,11 +30,65 @@ class MyApp extends StatelessWidget {
         body: Container(
             margin: const EdgeInsets.all(8),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
                       hintText: "Masukkan Suhu Dalam Celcius"),
                   keyboardType: TextInputType.number,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "Suhu Dalam Kelvin",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        Text(
+                          "0",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "Suhu Dalam Reamur",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        Text(
+                          "0",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 500,
+                  height: 45,
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    onPressed: () {},
+                    child: Text(
+                      "Konversi Suhu",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             )),
