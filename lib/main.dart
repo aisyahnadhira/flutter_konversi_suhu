@@ -12,9 +12,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController input = new TextEditingController();
+
   double _inputUser = 0;
   double _kelvin = 0;
   double _reamur = 0;
+  void konversi() {
+    setState(() {
+      _inputUser = double.parse(input.text);
+      _kelvin = _inputUser + 273.15;
+      _reamur = _inputUser * 0.8;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,6 +43,7 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextFormField(
+                  controller: input,
                   decoration: const InputDecoration(
                       hintText: "Masukkan Suhu Dalam Celcius"),
                   keyboardType: TextInputType.number,
@@ -50,7 +61,7 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ),
                         Text(
-                          "0",
+                          "$_kelvin",
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
@@ -68,7 +79,7 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ),
                         Text(
-                          "0",
+                          "$_reamur",
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
@@ -83,7 +94,7 @@ class _MyAppState extends State<MyApp> {
                   height: 45,
                   child: TextButton(
                     style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                    onPressed: () {},
+                    onPressed: konversi,
                     child: Text(
                       "Konversi Suhu",
                       style: TextStyle(color: Colors.white),
